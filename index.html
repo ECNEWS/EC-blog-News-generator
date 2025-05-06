@@ -1,1 +1,291 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC News AdSense Blog Generator AI Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div id="root" class="container mx-auto p-4"></div>
 
+    <script type="text/babel">
+        function App() {
+            const [company, setCompany] = React.useState('');
+            const [product, setProduct] = React.useState('');
+            const [category, setCategory] = React.useState('general');
+            const [ageGroup, setAgeGroup] = React.useState('18+');
+            const [duration, setDuration] = React.useState('7');
+            const [charges, setCharges] = React.useState('5000');
+            const [blogContent, setBlogContent] = React.useState('');
+            const [showForm, setShowForm] = React.useState(false);
+            const [formData, setFormData] = React.useState({
+                name: '',
+                email: '',
+                age: '',
+                idProof: '',
+                recaptcha: false
+            });
+
+            const categories = [
+                { value: 'general', label: 'सामान्य' },
+                { value: 'technology', label: 'प्रौद्योगिकी' },
+                { value: 'health', label: 'स्वास्थ्य' },
+                { value: 'education', label: 'शिक्षा' },
+                { value: 'business', label: 'व्यवसाय' }
+            ];
+
+            const ageGroups = ['13+', '18+', '21+'];
+            const durations = [
+                { days: '7', charge: '5000' },
+                { days: '14', charge: '9000' },
+                { days: '30', charge: '15000' }
+            ];
+
+            const handleFormSubmit = (e) => {
+                e.preventDefault();
+                if (formData.recaptcha && formData.age >= 18) {
+                    alert('प्रकाशक की जानकारी सत्यापित। अब ब्लॉग जनरेट करें।');
+                    setShowForm(false);
+                } else {
+                    alert('कृपया सभी जानकारी भरें और reCAPTCHA सत्यापित करें।');
+                }
+            };
+
+            const generateBlog = () => {
+                if (!formData.recaptcha) {
+                    alert('कृपया पहले प्रकाशक सत्यापन फॉर्म पूरा करें।');
+                    setShowForm(true);
+                    return;
+                }
+
+                const content = `
+# ${company} के ${product} के साथ EC News AdSense से अपनी न्यूज़ वेबसाइट पर कमाई शुरू करें
+
+**${company}** अपने नवीनतम उत्पाद **${product}** के साथ न्यूज़ पोर्टल मालिकों को **EC News AdSense** के माध्यम से विज्ञापन प्रदर्शित करके कमाई करने का अवसर प्रदान करता है। यह ब्लॉग ${category} श्रेणी के लिए तैयार किया गया है और ${ageGroup} आयु वर्ग के लिए उपयुक्त है। यह न्यूज़ ${duration} दिनों तक प्रदर्शित होगी, जिसके लिए ₹${charges} का शुल्क लागू है।
+
+## कानूनी अनुपालन और सामग्री फ़िल्टरिंग
+
+**${company}** यह सुनिश्चित करता है कि सभी न्यूज़ सामग्री EC News AdSense के कड़े कानूनी दिशानिर्देशों का पालन करती है। हमारी सामग्री निम्नलिखित मानदंडों को पूरा करती है:
+
+- **आयु-उपयुक्त सामग्री**: यह ब्लॉग ${ageGroup} आयु वर्ग के लिए फ़िल्टर किया गया है और इसमें ऐसी कोई सामग्री नहीं है जो कम आयु के बच्चों के लिए अनुपयुक्त हो।  
+- **कानूनी जाँच**: **${product}** स्वचालित रूप से सामग्री की जाँच करता है ताकि यह सुनिश्चित हो कि यह सभी स्थानीय और अंतरराष्ट्रीय नियमों का पालन करती है।  
+- **सुरक्षा**: हमारा प्लेटफॉर्म एन्क्रिप्टेड है और हैकिंग से बचाने के लिए उन्नत सुरक्षा प्रोटोकॉल का उपयोग करता है।  
+
+## EC News AdSense कैसे काम करता है?
+
+EC News AdSense के साथ अपनी न्यूज़ वेबसाइट पर विज्ञापन शुरू करना सरल है। यहाँ चरण-दर-चरण प्रक्रिया दी गई है:
+
+1. **EC News AdSense अकाउंट बनाएं**:  
+   **${company}** की वेबसाइट पर जाएं और **${product}** का उपयोग करके EC News AdSense के लिए साइन अप करें। अपनी वेबसाइट का URL, ईमेल, और अन्य जानकारी भरें। नियम और शर्तें स्वीकार करें।
+
+2. **वेबसाइट को EC News AdSense से कनेक्ट करें**:  
+   अपने EC News AdSense खाते में साइन इन करें, अपनी न्यूज़ वेबसाइट का URL जोड़ें, और **${product}** द्वारा प्रदान किया गया HTML कोड अपनी वेबसाइट के हेडर में पेस्ट करें।
+
+3. **विज्ञापन यूनिट बनाएं और जोड़ें**:  
+   विज्ञापन टैब पर जाएं, विज्ञापन यूनिट बनाएं, और कोड को अपनी वेबसाइट के उन हिस्सों में पेस्ट करें जहां आप विज्ञापन दिखाना चाहते हैं। **${product}** विज्ञापन प्लेसमेंट को अनुकूलित करने में मदद करता है।
+
+4. **EC News AdSense Approval प्राप्त करें**:  
+   **${company}** की टीम आपकी वेबसाइट की समीक्षा करेगी। यदि यह नियमों का पालन करती है, तो आपको विज्ञापन प्रदर्शन की अनुमति मिलेगी।
+
+5. **विज्ञापनों का प्रबंधन करें**:  
+   **${product}** के साथ विज्ञापन सेटिंग्स (आकार, प्रकार, स्थान) बदलें और परफॉर्मेंस ट्रैक करें।
+
+## न्यूज़ प्रदर्शन शुल्क और अवधि
+
+- **प्रदर्शन अवधि**: यह न्यूज़ ${duration} दिनों तक प्रदर्शित होगी।  
+- **शुल्क**: ₹${charges} (श्रेणी: ${category}, आयु वर्ग: ${ageGroup})।  
+- **नोट**: शुल्क और अवधि का चयन **${product}** के डैशबोर्ड से किया जा सकता है। लंबी अवधि के लिए छूट उपलब्ध है।
+
+## EC News AdSense के साथ **${company}** और **${product}** के फायदे
+
+- **आयु-आधारित फ़िल्टरिंग**: **${product}** यह सुनिश्चित करता है कि सामग्री केवल चयनित आयु वर्ग (${ageGroup}) के लिए उपयुक्त हो।  
+- **कानूनी अनुपालन**: सभी न्यूज़ सामग्री की स्वचालित जाँच।  
+- **सुरक्षा**: **${company}** का प्लेटफॉर्म हैकिंग से बचाने के लिए SSL और उन्नत फ़ायरवॉल का उपयोग करता है।  
+- **प्रासंगिक विज्ञापन**: उच्च-गुणवत्ता वाले विज्ञापन जो ${category} श्रेणी से मेल खाते हैं।  
+- **विश्लेषण**: **${product}** का डैशबोर्ड आपकी कमाई और विज्ञापन परफॉर्मेंस को ट्रैक करता है।
+
+## प्रकाशक सत्यापन प्रक्रिया
+
+**${company}** यह सुनिश्चित करता है कि सभी न्यूज़ प्रकाशक वैध और विश्वसनीय हों। प्रकाशक सत्यापन फॉर्म में निम्नलिखित जानकारी आवश्यक है:
+
+- **नाम और ईमेल**: प्रकाशक की पहचान के लिए।  
+- **आयु**: यह पुष्टि करने के लिए कि प्रकाशक 18 वर्ष से अधिक है।  
+- **पहचान प्रमाण**: सरकारी आईडी का विवरण।  
+- **reCAPTCHA**: यह सत्यापित करने के लिए कि प्रकाशक कोई बॉट नहीं है।  
+
+## अतिरिक्त सुझाव **${company}** से
+
+- **उच्च गुणवत्ता वाली सामग्री**: ${category} श्रेणी में प्रासंगिक और आकर्षक न्यूज़ प्रदान करें।  
+- **ट्रैफिक बढ़ाएँ**: अपनी वेबसाइट को लोकप्रिय बनाएं ताकि अधिक लोग विज्ञापन देखें।  
+- **विज्ञापन प्रयोग**: **${product}** के टूल्स के साथ विभिन्न विज्ञापन प्रारूपों का परीक्षण करें।  
+- **आकर्षक डिज़ाइन**: विज्ञापनों को उपयोगकर्ता अनुभव के साथ सामंजस्य में रखें।  
+
+## अभी शुरू करें!
+
+**${company}** और **${product}** के साथ, अपनी न्यूज़ वेबसाइट को आय-सृजन मशीन में बदलें। EC News AdSense के साथ साइन अप करें, **${product}** के टूल का उपयोग करें, और आज ही कमाई शुरू करें। अधिक जानकारी के लिए [EC News](https://ecnews.github.io/EC-blog-News-generator/) पर जाएँ।
+
+---
+
+**CTA**: अभी **${company}** के साथ साइन अप करें और **${product}** का उपयोग करके अपनी न्यूज़ वेबसाइट पर EC News AdSense विज्ञापन शुरू करें!  
+                `;
+                setBlogContent(content);
+            };
+
+            return (
+                <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+                    <h1 className="text-3xl font-bold text-center mb-6">EC News AdSense Blog Generator AI Tool</h1>
+                    {showForm ? (
+                        <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                            <h2 className="text-2xl font-semibold mb-4">प्रकाशक सत्यापन फॉर्म</h2>
+                            <div>
+                                <div className="mb-4">
+                                    <label className="block text-lg font-medium mb-2">नाम</label>
+                                    <input
+                                        type="text"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-lg font-medium mb-2">ईमेल</label>
+                                    <input
+                                        type="email"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-lg font-medium mb-2">आयु</label>
+                                    <input
+                                        type="number"
+                                        value={formData.age}
+                                        onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                        min="18"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-lg font-medium mb-2">पहचान प्रमाण (आईडी नंबर)</label>
+                                    <input
+                                        type="text"
+                                        value={formData.idProof}
+                                        onChange={(e) => setFormData({ ...formData, idProof: e.target.value })}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <div className="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+                                    <input
+                                        type="checkbox"
+                                        checked={formData.recaptcha}
+                                        onChange={(e) => setFormData({ ...formData, recaptcha: e.target.checked })}
+                                        className="mt-2"
+                                    /> reCAPTCHA सत्यापित करें
+                                </div>
+                                <button type="button" onClick={handleFormSubmit} className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700">
+                                    सत्यापन सबमिट करें
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="mb-4">
+                                <label className="block text-lg font-medium mb-2">कंपनी का नाम</label>
+                                <input
+                                    type="text"
+                                    value={company}
+                                    onChange={(e) => setCompany(e.target.value)}
+                                    className="w-full p-2 border rounded"
+                                    placeholder="उदाहरण: EC News"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-lg font-medium mb-2">उत्पाद का नाम</label>
+                                <input
+                                    type="text"
+                                    value={product}
+                                    onChange={(e) => setProduct(e.target.value)}
+                                    className="w-full p-2 border rounded"
+                                    placeholder="उदाहरण: NewsGenix"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-lg font-medium mb-2">न्यूज़ श्रेणी</label>
+                                <select
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
+                                    className="w-full p-2 border rounded"
+                                >
+                                    {categories.map(cat => (
+                                        <option key={cat.value} value={cat.value}>{cat.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-lg font-medium mb-2">आयु वर्ग</label>
+                                <select
+                                    value={ageGroup}
+                                    onChange={(e) => setAgeGroup(e.target.value)}
+                                    className="w-full p-2 border rounded"
+                                >
+                                    {ageGroups.map(age => (
+                                        <option key={age} value={age}>{age}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-lg font-medium mb-2">प्रदर्शन अवधि और शुल्क</label>
+                                <select
+                                    value={duration}
+                                    onChange={(e) => {
+                                        const selected = durations.find(d => d.days === e.target.value);
+                                        setDuration(selected.days);
+                                        setCharges(selected.charge);
+                                    }}
+                                    className="w-full p-2 border rounded"
+                                >
+                                    {durations.map(d => (
+                                        <option key={d.days} value={d.days}>{d.days} दिन (₹{d.charge})</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <button
+                                onClick={() => setShowForm(true)}
+                                className="w-full bg-yellow-600 text-white p-3 rounded hover:bg-yellow-700 mb-4"
+                            >
+                                प्रकाशक सत्यापन फॉर्म खोलें
+                            </button>
+                            <button
+                                onClick={generateBlog}
+                                className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700"
+                            >
+                                ब्लॉग जनरेट करें
+                            </button>
+                            {blogContent && (
+                                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                                    <h2 className="text-2xl font-semibold mb-4">जनरेटेड ब्लॉग</h2>
+                                    <div className="prose" dangerouslySetInnerHTML={{ __html: marked.parse(blogContent) }} />
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.18/lib/marked.umd.js"></script>
+</body>
+</html>
